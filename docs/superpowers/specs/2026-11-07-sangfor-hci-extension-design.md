@@ -343,7 +343,7 @@ These are design-time estimates. Hardware series counts depend on how many CPUs,
 | Q4 | Fan and RAID status string values. | Known tokens first (ok/normal/optimal → OK; failed/degraded/error → not OK); unknown strings use the change-from-baseline rule and are reported by the validation kit. |
 | Q5 | Which SNMP versions answer on the target HCI release, and whether the v2c community is fixed. | Default v3, with v2c `sangfopub` allowed. |
 | Q6 | Ticket lifetime. | Re-login on 401, and proactively every 10 minutes. |
-| Q7 | Minimum Managed cluster version for Python extensions, generic topology and screens. | `minDynatraceVersion: "1.285"`. |
+| Q7 | Minimum Managed cluster version for Python extensions, generic topology and screens. | `minDynatraceVersion: "1.285"`. **Partly settled (2026-11-08):** the package uploads and activates on Managed 1.348 (Environment ActiveGate 1.347) after the screen fixes in 0.1.1. Schema 1.348 requires `mode` on every `chartsCards` entry and `displayIcons` on every `entitiesListCards` entry, and rejects a plain `type("…")` list selector on a first install, because the entity types do not exist yet; every list selector therefore carries `$(entityConditions)`. Clusters older than 1.348 are not yet tested with these fields. |
 | Q8 | Is the alarm `status` field "active vs resolved"? | One-shot events with a 15-minute timeout. |
 | Q9 | Does the 2022 API spec still match current HCI releases (6.8 to 6.11)? | Code against the spec. Missing fields are tolerated (§8). |
 | Q10 | Are SNMP filesystem sizes GB (10⁹) or GiB (1024³)? | GiB. |

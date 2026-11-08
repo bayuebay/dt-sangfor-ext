@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "description": "Sangfor HCI simulator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "activationContext": "REMOTE",
   "featureSets": ["cluster", "host", "vm", "datastore", "hardware"],
   "pythonRemote": {
