@@ -32,7 +32,7 @@ body:
     attributes:
       label: Extension version
       description: "`version` in extension/extension.yaml, or the commit if you built from source."
-      placeholder: 0.1.0
+      placeholder: 0.1.1
     validations:
       required: true
   - type: input

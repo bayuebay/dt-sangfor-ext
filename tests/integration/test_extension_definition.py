@@ -132,3 +132,33 @@ def test_vm_metrics_carry_every_dimension_the_host_rule_needs_when_the_host_is_k
         assert needed <= set(metric.dimensions), (metric.key, needed - set(metric.dimensions))
         # The VM line must name the host exactly as the host's own lines do, or the host entity would flip names.
         assert _render(rule["instanceNamePattern"], metric.dimensions) == host_names[metric.dimensions["sangfor.host.ip"]]
+
+
+# Screens: Dynatrace Managed 1.348 rejected the 0.1.0 package on upload (PR #2). These rules keep it uploadable.
+
+
+def _cards(kind):
+    return [(screen["entityType"], card) for screen in EXT["screens"] for card in screen.get(kind) or []]
+
+
+def test_screen_cards_carry_fields_the_managed_1348_schema_requires():
+    charts, lists = _cards("chartsCards"), _cards("entitiesListCards")
+    assert charts and lists
+    missing = [f"{et}/{c['key']}: mode" for et, c in charts if "mode" not in c]
+    missing += [f"{et}/{c['key']}: displayIcons" for et, c in lists if "displayIcons" not in c]
+    assert missing == []
+
+
+def test_every_entity_list_selector_is_a_template():
+    # A plain type("...") selector is checked against existing entity types and fails on a first install,
+    # because the same upload creates those types.
+    plain = [f"{et}/{c['key']}" for et, c in _cards("entitiesListCards") if "$(entityConditions)" not in c["entitySelectorTemplate"]]
+    assert plain == []
+
+
+def test_screen_layouts_only_reference_cards_that_exist():
+    for screen in EXT["screens"]:
+        keys = {card["key"] for kind in ("chartsCards", "entitiesListCards") for card in screen.get(kind) or []}
+        for part in ("detailsSettings", "listSettings"):
+            for card in (screen.get(part) or {}).get("layout", {}).get("cards", []):
+                assert card["key"] in keys, (screen["entityType"], part, card["key"])

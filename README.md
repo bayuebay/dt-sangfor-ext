@@ -131,6 +131,7 @@ Then add a monitoring configuration per Sangfor cluster in **Extensions → cust
 - Dynatrace Managed with an **Environment ActiveGate** (not a Cluster ActiveGate) in an ActiveGate group.
   - ActiveGate 1.333 or newer runs the Python 3.14 runtime. Older ActiveGates use the bundled 3.10 build.
   - Python 3.10 support ended on 2026-10-26.
+  - Validated: version 0.1.1 uploads and activates on Dynatrace Managed 1.348 with Environment ActiveGate 1.347. Version 0.1.0 is rejected there; do not use it.
 - Network from the ActiveGate: TCP 443 to the HCI cluster VIP, and UDP 161 to every HCI node.
 - Sangfor side:
   - A read-only API account that can read: the cluster overview, the host list and node info, the storage list, VMs, and alerts/logs. The extension only sends GET requests, plus the one login POST.
