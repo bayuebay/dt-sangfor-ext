@@ -361,6 +361,7 @@ Simulator, for manual runs:
 | `validation-kit/` | Read-only probe for a real HCI with a redacted output zip |
 | `tests/` | Unit and integration tests; CI runs them on Python 3.10 and 3.14 |
 | `docs/` | Design spec, implementation plan and the README images |
+| `CHANGELOG.md` | What changed in each version |
 
 </details>
 

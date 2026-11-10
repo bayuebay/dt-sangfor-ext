@@ -82,4 +82,4 @@ suite there too; CI does both.
 1. Raise `version` in `extension/extension.yaml`. Dynatrace rejects a version it already has.
 2. Build and sign: `dt-sdk build --only-extra-platforms -e manylinux2014_x86_64 -e win_amd64 -p 3.10 -p 3.14`.
 3. Check: `python scripts/check_package.py dist/*.zip` must print PACKAGE OK.
-4. Upload with `dt-sdk upload --active` and note the version in the release notes.
+4. Upload with `dt-sdk upload --active` and add the version to [CHANGELOG.md](CHANGELOG.md) and the release notes.
